@@ -7,12 +7,9 @@ RSpec.describe "Users", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
-
-  describe "GET /create" do
-    it "returns http success" do
-      get "/users/create"
-      expect(response).to have_http_status(:success)
-    end
+  it "creates a user and redirects to root" do
+    user = FactoryBot.create(:user)
+    post "/users", params: { username: user.username, password: user.password }
+    expect(response).to redirect_to(root_path)
   end
-
 end
