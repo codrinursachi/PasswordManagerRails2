@@ -22,4 +22,9 @@ RSpec.describe "Sessions", type: :request do
     end
   end
 
+  it "should redirect to root after session creation" do
+    user = FactoryBot.create(:user)
+    post "/login", params: { email: user.username, password: user.password_digest }
+    expect(response).to redirect_to(root_path)
+  end
 end
