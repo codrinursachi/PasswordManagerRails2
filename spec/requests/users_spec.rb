@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
+RSpec.describe UsersController, type: :request do
   describe "GET /new" do
     it "returns http success" do
       get "/users/new"
@@ -8,7 +8,7 @@ RSpec.describe "Users", type: :request do
     end
   end
   it "creates a user and redirects to root" do
-    user = FactoryBot.create(:user)
+    user = FactoryBot.build(:user)
     post "/users", params: { username: user.username, password: user.password }
     expect(response).to redirect_to(root_path)
   end
