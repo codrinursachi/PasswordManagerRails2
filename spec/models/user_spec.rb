@@ -9,4 +9,8 @@ RSpec.describe User, type: :model do
     user.username = nil
     expect(user).to be_invalid
   end
+  it "is invalid without a password" do
+    user.password_digest = nil
+    expect(user).to be_invalid
+  end
 end
