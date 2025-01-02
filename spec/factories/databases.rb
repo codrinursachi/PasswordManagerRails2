@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :database do
-    name { "MyString" }
-    user { nil }
+    sequence(:name) { |n| "DB#{n}" }
+    user
   end
 end
