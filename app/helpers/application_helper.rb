@@ -1,7 +1,5 @@
 module ApplicationHelper
 
-  before_action :authentication_required
-
   def authentication_required
     redirect_to login_path unless logged_in?
   end
