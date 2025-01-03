@@ -3,7 +3,8 @@
   <%= link_to "Log in", login_path%>
   <%= link_to "Sign up", new_user_path %>
 <% else %>
-  <%= link_to "Log out", '/logout'%>
+  <%= link_to "Log out", '/logout'%><br>
+  <%= "Database: "+current_database.name if current_database%>
   <%= link_to "Database Manager", databases_path %>
 <% end %>
 <% content_for :title, "Passwords" %>
@@ -22,8 +23,11 @@
       </p>
     <% end %>
   </div>
-
-  <%= link_to "New password", new_password_path %>
+  <% if current_database %>
+    <%= link_to "New password", new_password_path %>
+  <% else %>
+    Create a database to add passwords.
+  <% end %>
 <% else %>
   <p>You must be logged in to see or add passwords.</p>
 <% end %>

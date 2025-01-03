@@ -52,7 +52,9 @@ class DatabasesController < ApplicationController
   # DELETE /databases/1 or /databases/1.json
   def destroy
     @database.destroy!
-
+    current_database = Database.select{ |database| database.user_id == session[:user_id] }.first
+    session[:current_database_id] = nil
+    session[:current_database_id] = current_database.id if current_database
     respond_to do |format|
       format.html { redirect_to databases_path, status: :see_other, notice: "Database was successfully destroyed." }
       format.json { head :no_content }
