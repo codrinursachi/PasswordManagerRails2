@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.databases << Database.create(name: "Default")
+    @user.databases << Database.new(name: "Default")
     if @user.save
       session[:current_user_id] = @user.id
       session[:current_database_id] = @user.databases.first.id
@@ -16,6 +16,6 @@ class UsersController < ApplicationController
   end
   private
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :password_confirmation)
   end
 end

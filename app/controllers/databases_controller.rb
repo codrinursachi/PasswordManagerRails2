@@ -3,7 +3,7 @@ class DatabasesController < ApplicationController
 
   # GET /databases or /databases.json
   def index
-    @databases = Database.all
+    @databases = Database.all.select { |database| database.user_id == session[:current_user_id] }
   end
 
   # GET /databases/1 or /databases/1.json
