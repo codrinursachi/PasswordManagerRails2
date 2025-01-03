@@ -4,7 +4,7 @@
 
 <div>
   <%= link_to "Edit this database", edit_database_path(@database) %> |
-  <%= link_to "Back to databases", databases_path %>
-
+  <%= link_to "Back to databases", databases_path %> |
+  <%= link_to "See passwords for this database", root_path %>
   <%= button_to "Destroy this database", @database, method: :delete %>
 </div>

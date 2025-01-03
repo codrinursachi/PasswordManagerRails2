@@ -8,6 +8,7 @@ class DatabasesController < ApplicationController
 
   # GET /databases/1 or /databases/1.json
   def show
+    session[:current_database_id] = @database.id
   end
 
   # GET /databases/new
@@ -22,6 +23,7 @@ class DatabasesController < ApplicationController
   # POST /databases or /databases.json
   def create
     @database = Database.new(database_params)
+    @database.user_id = session[:current_user_id]
 
     respond_to do |format|
       if @database.save
@@ -65,6 +67,6 @@ class DatabasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def database_params
-      params.expect(database: [ :name, :user_id ])
+      params.expect(database: [ :name ])
     end
 end

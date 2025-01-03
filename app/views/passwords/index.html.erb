@@ -1,16 +1,25 @@
 <p style="color: green"><%= notice %></p>
-
+<% unless logged_in? %>
+  <%= link_to "Log in", login_path%>
+  <%= link_to "Sign up", new_user_path %>
+<% else %>
+  <%= link_to "Log out", '/logout'%>
+  <%= link_to "Database Manager", databases_path %>
+<% end %>
 <% content_for :title, "Passwords" %>
 
 <h1>Passwords</h1>
+<% if logged_in? %>
+  <div id="passwords">
+    <% @passwords.each do |password| %>
+      <%= render password %>
+      <p>
+        <%= link_to "Show this password", password %>
+      </p>
+    <% end %>
+  </div>
 
-<div id="passwords">
-  <% @passwords.each do |password| %>
-    <%= render password %>
-    <p>
-      <%= link_to "Show this password", password %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New password", new_password_path %>
+  <%= link_to "New password", new_password_path %>
+<% else %>
+  <p>You must be logged in to see or add passwords.</p>
+<% end %>

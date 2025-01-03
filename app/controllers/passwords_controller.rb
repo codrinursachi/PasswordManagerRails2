@@ -3,7 +3,7 @@ class PasswordsController < ApplicationController
 
   # GET /passwords or /passwords.json
   def index
-    @passwords = Password.all
+    @passwords = Password.all.select { |password| password.database_id == session[:current_database_id] }
   end
 
   # GET /passwords/1 or /passwords/1.json
@@ -22,7 +22,7 @@ class PasswordsController < ApplicationController
   # POST /passwords or /passwords.json
   def create
     @password = Password.new(password_params)
-
+    @password.database_id = session[:current_database_id]
     respond_to do |format|
       if @password.save
         format.html { redirect_to @password, notice: "Password was successfully created." }
