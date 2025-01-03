@@ -69,3 +69,5 @@ end
 gem "bcrypt"
 
 gem "rails-controller-testing"
+
+gem "cancancan"
