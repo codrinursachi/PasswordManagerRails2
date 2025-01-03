@@ -1,9 +1,8 @@
 class PasswordsController < ApplicationController
-  before_action :set_password, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /passwords or /passwords.json
   def index
-    @passwords = Password.all.select { |password| password.database_id == session[:current_database_id] }
     if params[:query]
       @passwords = @passwords.select { |password| params[:query].split.all? { |word| password.url.include?(word)||password.username.include?(word) ||password.category_path.include?(word)||password.tags.include?(word)||password.notes.include?(word)} }
     end
@@ -62,9 +61,6 @@ class PasswordsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_password
-      @password = Password.find(params.expect(:id))
-    end
 
     # Only allow a list of trusted parameters through.
     def password_params

@@ -1,9 +1,8 @@
 class DatabasesController < ApplicationController
-  before_action :set_database, only: %i[ show edit update destroy ]
-
+  #before_action :set_database, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
   # GET /databases or /databases.json
   def index
-    @databases = Database.all.select { |database| database.user_id == session[:user_id] }
   end
 
   # GET /databases/1 or /databases/1.json
@@ -63,9 +62,6 @@ class DatabasesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_database
-      @database = Database.find(params.expect(:id))
-    end
 
     # Only allow a list of trusted parameters through.
     def database_params

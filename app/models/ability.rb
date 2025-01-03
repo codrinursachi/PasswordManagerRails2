@@ -4,6 +4,9 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    return unless user.present?
+    can :manage, Database, user: user
+    can :manage, Password, database: { user: user }
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?
