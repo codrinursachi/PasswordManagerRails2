@@ -7,7 +7,11 @@
   <%= link_to "Database Manager", databases_path %>
 <% end %>
 <% content_for :title, "Passwords" %>
-
+<%= form_with url: root_path, method: :get do |form| %>
+  <%= form.label :query, "Search for:" %>
+  <%= form.search_field :query %>
+  <%= form.submit "Search" %>
+<% end %>
 <h1>Passwords</h1>
 <% if logged_in? %>
   <div id="passwords">

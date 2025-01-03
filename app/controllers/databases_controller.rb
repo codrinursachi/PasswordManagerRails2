@@ -3,7 +3,7 @@ class DatabasesController < ApplicationController
 
   # GET /databases or /databases.json
   def index
-    @databases = Database.all.select { |database| database.user_id == session[:current_user_id] }
+    @databases = Database.all.select { |database| database.user_id == session[:user_id] }
   end
 
   # GET /databases/1 or /databases/1.json
@@ -23,7 +23,7 @@ class DatabasesController < ApplicationController
   # POST /databases or /databases.json
   def create
     @database = Database.new(database_params)
-    @database.user_id = session[:current_user_id]
+    @database.user_id = session[:user_id]
 
     respond_to do |format|
       if @database.save

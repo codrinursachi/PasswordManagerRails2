@@ -4,6 +4,9 @@ class PasswordsController < ApplicationController
   # GET /passwords or /passwords.json
   def index
     @passwords = Password.all.select { |password| password.database_id == session[:current_database_id] }
+    if params[:query]
+      @passwords = @passwords.select { |password| params[:query].split.all? { |word| password.url.include?(word)||password.username.include?(word) ||password.category_path.include?(word)||password.tags.include?(word)||password.notes.include?(word)} }
+    end
   end
 
   # GET /passwords/1 or /passwords/1.json
