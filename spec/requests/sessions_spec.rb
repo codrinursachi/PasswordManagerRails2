@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Sessions", type: :request do
+RSpec.describe SessionsController, type: :request do
   describe "GET /login" do
     it "returns http success" do
       get "/login"

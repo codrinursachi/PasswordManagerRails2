@@ -67,3 +67,5 @@ group :test do
 end
 
 gem "bcrypt"
+
+gem "rails-controller-testing"
