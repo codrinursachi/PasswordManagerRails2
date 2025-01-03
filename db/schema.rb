@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_02_212539) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_03_114307) do
   create_table "databases", force: :cascade do |t|
     t.string "name"
     t.integer "user_id", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_02_212539) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "databases", "users"

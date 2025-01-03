@@ -9,7 +9,7 @@ RSpec.describe UsersController, type: :request do
   end
   it "creates a user and redirects to root" do
     user = FactoryBot.build(:user)
-    post "/users", params: { user: {username: user.username, password: user.password }}
+    post "/users", params: { user: {username: user.username, password: user.password, password_confirmation: user.password_confirmation} }
     expect(response).to redirect_to(root_path)
   end
 end

@@ -16,7 +16,7 @@ RSpec.describe SessionsController, type: :request do
   end
 
   it "should redirect to root after session creation" do
-    user = FactoryBot.create(:user)
+    user = FactoryBot.create(:database).user
     post "/login", params: { username: user.username, password: user.password }
     expect(response).to redirect_to(root_path)
   end
