@@ -5,8 +5,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.databases << Database.create(name: "Default")
     if @user.save
       session[:current_user_id] = @user.id
+      session[:current_database_id] = @user.databases.first.id
       redirect_to root_path
     else
       render :new
