@@ -1,6 +1,10 @@
 class PasswordsController < ApplicationController
   load_and_authorize_resource
 
+  rescue_from CanCan::AccessDenied do |exception|
+    render index
+  end
+  
   # GET /passwords or /passwords.json
   def index
     if params[:query]
