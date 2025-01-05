@@ -1,14 +1,19 @@
 class PasswordsController < ApplicationController
   load_and_authorize_resource
-
   rescue_from CanCan::AccessDenied do |exception|
-    render index
+    render exception
+    #redirect_to '/login'
   end
-  
   # GET /passwords or /passwords.json
   def index
     if params[:query]
       @passwords = @passwords.select { |password| params[:query].split.all? { |word| password.url.include?(word)||password.username.include?(word) ||password.category_path.include?(word)||password.tags.include?(word)||password.notes.include?(word)} }
+    end
+    if params[:category]
+      @passwords = @passwords.select { |password| password.category_path.include?(params[:category]) }
+    end
+    if params[:favorite]
+      @passwords = @passwords.select { |password| password.favorite }
     end
   end
 
@@ -18,7 +23,7 @@ class PasswordsController < ApplicationController
 
   # GET /passwords/new
   def new
-    @password = Password.new
+    @password = Password.new(database_id: session[:current_database_id])
   end
 
   # GET /passwords/1/edit

@@ -11,6 +11,10 @@
 <%= form_with url: root_path, method: :get do |form| %>
   <%= form.label :query, "Search for:" %>
   <%= form.search_field :query %>
+  <%= form.label :favorite, "Favorite"%>
+  <%= form.check_box :favorite %>
+  <%= form.label :category, "Category" %>
+  <%= form.text_field :category %>
   <%= form.submit "Search" %>
 <% end %>
 <h1>Passwords</h1>
