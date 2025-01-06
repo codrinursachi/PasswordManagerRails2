@@ -15,6 +15,7 @@ class PasswordsController < ApplicationController
     if params[:favorite]
       @passwords = @passwords.select { |password| password.favorite }
     end
+    @passwords = @passwords.select { |password| password.database_id == session[:current_database_id] }
   end
 
   # GET /passwords/1 or /passwords/1.json
